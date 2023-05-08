@@ -72,5 +72,15 @@ SELECT *
 FROM employee e 
 WHERE employee_position = 'CEO' OR employee_position = 'kierownik' OR employee_position = 'menager'
 ORDER BY employee_lname
+
+## szczegółowe przelewy
+CREATE VIEW detailed_overflow AS
+SELECT *
+FROM overflow  
+LEFT JOIN card  
+ON overflow.overflow_send_number = card.card_nr 
+LEFT JOIN client
+USING(client_nr)
+
 ## klienci z miesiacem do konca karty
 
