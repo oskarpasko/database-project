@@ -29,3 +29,10 @@ SELECT @emp;
 
 #############################################################################
 ## procedura liczaca ilosc wykonanych przelewow przez danego klienta
+## procedura liczaca ilosc otrzymanych przelewow 
+## procedura liczaca ilosc pracownikow w kazdym miescie
+## procedura liczaca klientow w kazdym miescie 
+## procedura liczaca ilosc zadluzonych osob 
+## procedura liczaca ilosc odzialow ogolnie
+## procedura wyswietlja czy klient jest zadluzony czy nie 
+
