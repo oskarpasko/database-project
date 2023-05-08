@@ -1,3 +1,13 @@
+/*
+
+Kod generujący bazę danych aplikacji BankApp
+
+Tabele: Client, Card, Overflow, Company, Positions, Employee, Client_Company
+
+Dodatkowo kod wprowadza dane do bazy
+
+*/
+
 CREATE SCHEMA bankapp;
 
 USE bankapp;
