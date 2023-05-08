@@ -47,6 +47,27 @@ SELECT @emp;
 
 #############################################################################
 ## procedura liczaca ilosc pracownikow w kazdym miescie
+DELIMITER $$
+$$
+CREATE PROCEDURE bankapp.company_employee(IN city VARCHAR(20), OUT emp INT)
+BEGIN
+	SELECT COUNT(*) INTO emp FROM company
+	JOIN employee
+	ON employee.employee_company = company.company_id 
+	WHERE company_city = city;
+END$$
+DELIMITER ;
+
+## przykładowe wywołania procedury
+CALL company_employee  ('Rzeszów', @emp);
+SELECT @emp;
+
+CALL company_employee  ('Warszawa', @emp);
+SELECT @emp;
+
+CALL company_employee  ('Kraków', @emp);
+SELECT @emp;
+
 #############################################################################
 ## procedura liczaca klientow w kazdym miescie 
 #############################################################################
