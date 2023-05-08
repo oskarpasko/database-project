@@ -58,5 +58,12 @@ WHERE employee_position = 'ksiegowy'
 ORDER BY employee_lname
 
 ## klienci z kartami kredytowymi 
+CREATE VIEW credit_cards AS
+SELECT * 
+FROM card c 
+LEFT JOIN client
+USING(client_nr)
+WHERE card_type = 'Kredytowa'
+ORDER BY client_lname
 
 ## klienci z miesiacem do konca karty 
