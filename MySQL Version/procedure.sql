@@ -28,3 +28,4 @@ CALL employ('menager', @emp);
 SELECT @emp;
 
 #############################################################################
+## procedura liczaca ilosc wykonanych przelewow przez danego klienta
