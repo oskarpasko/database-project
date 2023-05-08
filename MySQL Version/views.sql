@@ -56,3 +56,7 @@ SELECT *
 FROM employee e 
 WHERE employee_position = 'ksiegowy'
 ORDER BY employee_lname
+
+## klienci z kartami kredytowymi 
+
+## klienci z miesiacem do konca karty 
