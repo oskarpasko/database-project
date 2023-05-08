@@ -67,5 +67,10 @@ WHERE card_type = 'Kredytowa'
 ORDER BY client_lname
 
 ## zarzad view
+CREATE VIEW zarzad AS
+SELECT *
+FROM employee e 
+WHERE employee_position = 'CEO' OR employee_position = 'kierownik' OR employee_position = 'menager'
+ORDER BY employee_lname
 ## klienci z miesiacem do konca karty
 
