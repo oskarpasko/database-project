@@ -66,4 +66,6 @@ USING(client_nr)
 WHERE card_type = 'Kredytowa'
 ORDER BY client_lname
 
-## klienci z miesiacem do konca karty 
+## zarzad view
+## klienci z miesiacem do konca karty
+
