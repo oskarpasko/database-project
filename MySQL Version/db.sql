@@ -149,3 +149,91 @@ INSERT INTO overflow values(null, '0192837465657489', '1234567890123456', '2021-
 INSERT INTO overflow values(null, '0293650142399990', '9102910291029102', '2021-11-14', 305.64);
 INSERT INTO overflow values(null, '6543210987654321', '1122334455667788', '2022-12-13', -538.57);
 INSERT INTO overflow values(null, '6543210987654321', '1957463518203058', '2022-10-16', 476.67);
+
+CREATE TABLE company
+(
+    company_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    company_city VARCHAR(100) NOT NULL,
+    company_street VARCHAR(255) NOT NULL,
+    company_nr VARCHAR(5) NOT NULL,
+    company_post_code VARCHAR(6) NOT NULL CHECK(char_length(company_post_code)=6)
+);
+
+INSERT INTO company values(null, 'Rzeszów', 'Dąbrowskiego', '21', '35-018');
+INSERT INTO company values(null, 'Warszawa', 'Polna', '2', '43-023');
+INSERT INTO company values(null, 'Radom', 'Miastowa', '21/1', '57-925');
+INSERT INTO company values(null, 'Gdańsk', 'Nieznana', '21B', '77-925');
+INSERT INTO company values(null, 'Rzeszów', 'Wykwintna', '867', '21-582');
+INSERT INTO company values(null, 'Wrocław', 'Wiedźminowa', '45', '45-278');
+INSERT INTO company values(null, 'Wrocław', 'Beskidzka', '12', '32-364');
+INSERT INTO company values(null, 'Kraków', 'Niebiańska', '76', '86-875');
+INSERT INTO company values(null, 'Berlin', 'Nazwana', '13', '23-153');
+
+CREATE TABLE positions
+(
+    position_name VARCHAR(100) UNIQUE PRIMARY KEY NOT NULL,
+    position_salary FLOAT NOT NULL CHECK(position_salary >= 2200.0)
+);
+
+INSERT INTO positions values('pracownik', 2200.0);
+INSERT INTO positions values('kierownik', 5600.0);
+INSERT INTO positions values('menager', 3200.0);
+INSERT INTO positions values('CEO', 12200.0);
+INSERT INTO positions values('sprzedawca', 2500.0);
+INSERT INTO positions values('księgowy', 4100.0);
+INSERT INTO positions values('ochroniarz', 3800.0);
+
+CREATE TABLE employee
+(
+    employee_pesel VARCHAR(11) UNIQUE PRIMARY KEY NOT NULL CHECK(char_length(employee_pesel)=11),
+    employee_fname VARCHAR(100) NOT NULL,
+    employee_lname VARCHAR(100) NOT NULL,
+    employee_position VARCHAR(100) NOT NULL,
+    employee_company INT NOT NULL,
+
+    FOREIGN KEY (employee_position) REFERENCES positions(position_name),
+    FOREIGN KEY (employee_company) REFERENCES company(company_id)
+);
+
+INSERT INTO employee values('61939237410', 'Rafał', 'Zaoczny', 'CEO', 4);
+INSERT INTO employee values('23784671911', 'Tomasz', 'Kowalski', 'pracownik', 9);
+INSERT INTO employee values('74382941824', 'Oskar', 'Nieznany', 'pracownik', 4);
+INSERT INTO employee values('53247182311', 'Magdalena', 'Zaciemna', 'menager', 1);
+INSERT INTO employee values('65262457412', 'Monika', 'Naruszona', 'pracownik', 2);
+INSERT INTO employee values('51436141414', 'Andrzej', 'Wylewny', 'menager', 3);
+INSERT INTO employee values('54316346513', 'Zbigniew', 'Odrobiony', 'pracownik', 4);
+INSERT INTO employee values('52167637614', 'Gerwazy', 'Zegarmistrz', 'sprzedawca', 5);
+INSERT INTO employee values('64275471243', 'Ala', 'Kowalska', 'sprzedawca', 6);
+INSERT INTO employee values('76735133245', 'Ala', 'Nowakowska', 'pracownik', 7);
+INSERT INTO employee values('83423432223', 'Tomasz', 'Nieznaczący', 'sprzedawca', 8);
+INSERT INTO employee values('24724534145', 'Jakub', 'Koło', 'sprzedawca', 9);
+INSERT INTO employee values('65275472524', 'Sebastian', 'Deska', 'sprzedawca', 1);
+INSERT INTO employee values('63253413131', 'Paulina', 'Wilczyca', 'sprzedawca', 2);
+INSERT INTO employee values('15346346316', 'Ewelina', 'Odlotowa', 'pracownik', 3);
+INSERT INTO employee values('72452154353', 'Karol', 'Wykwit', 'sprzedawca', 4);
+INSERT INTO employee values('62754123144', 'Amadeusz', 'Ptak', 'menager', 5);
+INSERT INTO employee values('16146352244', 'Malina', 'Kwiat', 'sprzedawca', 6);
+INSERT INTO employee values('16154353252', 'Stanisław', 'Domeradzki', 'sprzedawca', 7);
+INSERT INTO employee values('76736452423', 'Krzysztof', 'Lubiany', 'pracownik', 8);
+INSERT INTO employee values('72454424232', 'Wioletta', 'Ostrozna', 'sprzedawca', 9);
+INSERT INTO employee values('89244535255', 'Natalia', 'Elitkna', 'menager', 1);
+INSERT INTO employee values('98753523525', 'Weronika', 'Antyczna', 'sprzedawca', 2);
+INSERT INTO employee values('27257837589', 'Michał', 'Ucziny', 'sprzedawca', 3);
+INSERT INTO employee values('79821179085', 'Ewa', 'Uczona', 'sprzedawca', 4);
+INSERT INTO employee values('79184658551', 'Aleksandra', 'Królweska', 'sprzedawca', 5);
+
+CREATE TABLE client_company
+(
+    client_nr VARCHAR(16) NOT NULL,
+    company_id INT NOT NULL,
+    
+    PRIMARY KEY (client_nr, company_id),
+
+    FOREIGN KEY (client_nr) REFERENCES client (client_nr),
+    FOREIGN KEY (company_id) REFERENCES company (company_id)
+);
+
+INSERT INTO client_company values('123456', 1);
+INSERT INTO client_company values('654321', 3);
+INSERT INTO client_company values('923860', 6);
+INSERT INTO client_company values('015348', 4);
