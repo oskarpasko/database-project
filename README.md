@@ -6,3 +6,4 @@ Repository for project for "Bazy Danych" on university.
 + włącz aplikację XAMPP i uruchom funkcję Apache oraz MySQL
 + przejdź do `Explorer -> htdocs` i wrzuć tam folder 'bankapp'
 + wpisz w przeglądarkę `http://localhost/bankapp/`
++ powinna się odpalić główna strona tj. index.php
