@@ -8,7 +8,7 @@
     <!-- Bootstraps CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
     <!-- Bootstraps JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
@@ -21,35 +21,36 @@
 
     </style>
 
-    <title>MainPage</title>
+    <title>Cards</title>
   </head>
   <body class="bg-secondary d-flex flex-column min-vh-100">
 
-  <!----------- CLIENTS ----------->
+  <!----------- CARDS ----------->
   <div class="container mt-5 mb-5 content-height">
         <div class="row">
             <table class="table table-hover bg-white text-center fs-2">
                     <thead>
                         <tr>
                         <th scope="col">#</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Street</th>
                         <th scope="col">Number</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
+                        <th scope="col">Post Code</th>
                         </tr>
                     </thead>
                 <tbody>
             
                 <?php
-                    include 'connect.php';
+                    include '../connect.php';
 
-                    $sql = "SELECT * FROM client";
+                    $sql = "SELECT * FROM company ORDER BY company_city";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
                         $nr=1;
                     while($row = $result->fetch_assoc()) {
                         
-                        echo '<tr><th scope="row">'.$nr.'</th><td>'.$row['client_nr'].'</td><td>'.$row['client_fname'].'</td><td>'.$row['client_lname'].'</td></tr>';
+                        echo '<tr><th scope="row">'.$nr.'</th><td>'.$row['company_city'].'</td><td>'.$row['company_street'].'</td><td>'.$row['company_nr'].'</td><td>'.$row['company_post_code'].'</td></tr>';
                         $nr+=1;
                     }
                     } else {
