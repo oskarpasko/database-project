@@ -75,5 +75,6 @@ SELECT @emp;
 #############################################################################
 ## Procedury CRUDowe
 ## Funkcja logujaca klienta
-## procedura wyswietlja czy klient jest zadluzony czy nie 
+## Funkcja wyswietlja czy klient jest zadluzony czy nie 
+## Funckja zwracajaca sume wyplat dla pracownikow w poszczegolnej placowce
 
