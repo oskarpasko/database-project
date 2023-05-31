@@ -69,11 +69,11 @@ CALL company_employee  ('Kraków', @emp);
 SELECT @emp;
 
 #############################################################################
-## procedura liczaca klientow w kazdym miescie 
+## Funkcja liczaca klientow w kazdym miescie 
 #############################################################################
-## procedura liczaca ilosc zadluzonych osob 
+## Funkcja liczaca ilosc zadluzonych osob 
 #############################################################################
-## procedura liczaca ilosc odzialow ogolnie
-#############################################################################
+## Procedury CRUDowe
+## Funkcja logujaca klienta
 ## procedura wyswietlja czy klient jest zadluzony czy nie 
 
