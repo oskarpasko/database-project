@@ -50,3 +50,4 @@ DELIMITER ;
 ## Przykłady wywołania
 SELECT client_company_count("Rzeszów")
 SELECT company_salary("Warszawa")
+SELECT log_in("rzaoczny@bankapp.com", "61939237410")
