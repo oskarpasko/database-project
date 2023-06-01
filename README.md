@@ -6,6 +6,9 @@ W programie do obsługi bazy danych np w DBeaver, MySQL Workbench itp. wklej ora
 + db.sql
 + views.sql
 + procedure.sql
++ functions.sql
+
+Pamiętaj aby z plików z procedurami i funkcjami nie wklejać wywołań.
 
 ## Jak odpalić stronę?
 + upewnij się, że jest zaimportowana baza danych
