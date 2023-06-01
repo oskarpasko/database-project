@@ -196,6 +196,7 @@ INSERT INTO positions values('ochroniarz', 3800.0);
 CREATE TABLE employee
 (
     employee_pesel VARCHAR(11) UNIQUE PRIMARY KEY NOT NULL CHECK(char_length(employee_pesel)=11),
+    employee_email VARCHAR(100) UNIQUE NOT NULL,
     employee_fname VARCHAR(100) NOT NULL,
     employee_lname VARCHAR(100) NOT NULL,
     employee_position VARCHAR(100) NOT NULL,
