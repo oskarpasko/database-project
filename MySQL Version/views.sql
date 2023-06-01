@@ -82,5 +82,10 @@ ON overflow.overflow_send_number = card.card_nr
 LEFT JOIN client
 USING(client_nr)
 
-## klienci z miesiacem do konca karty
-
+## dane klientów i placówek do którychnależą
+CREATE VIEW client_company_view AS
+SELECT *
+FROM client_company 
+LEFT JOIN client USING(client_nr)
+LEFT JOIN company USING(company_id)
+ORDER BY company_city
