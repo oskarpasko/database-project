@@ -68,8 +68,7 @@ SELECT @emp;
 CALL company_employee  ('Kraków', @emp);
 SELECT @emp;
 
-#############################################################################
-## Funkcja liczaca klientow w kazdym miescie 
+
 #############################################################################
 ## Funkcja liczaca ilosc zadluzonych osob 
 #############################################################################
