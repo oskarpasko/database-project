@@ -206,32 +206,32 @@ CREATE TABLE employee
     FOREIGN KEY (employee_company) REFERENCES company(company_id)
 );
 
-INSERT INTO employee values('61939237410', 'Rafał', 'Zaoczny', 'CEO', 4);
-INSERT INTO employee values('23784671911', 'Tomasz', 'Kowalski', 'pracownik', 9);
-INSERT INTO employee values('74382941824', 'Oskar', 'Nieznany', 'pracownik', 4);
-INSERT INTO employee values('53247182311', 'Magdalena', 'Zaciemna', 'menager', 1);
-INSERT INTO employee values('65262457412', 'Monika', 'Naruszona', 'pracownik', 2);
-INSERT INTO employee values('51436141414', 'Andrzej', 'Wylewny', 'menager', 3);
-INSERT INTO employee values('54316346513', 'Zbigniew', 'Odrobiony', 'pracownik', 4);
-INSERT INTO employee values('52167637614', 'Gerwazy', 'Zegarmistrz', 'sprzedawca', 5);
-INSERT INTO employee values('64275471243', 'Ala', 'Kowalska', 'sprzedawca', 6);
-INSERT INTO employee values('76735133245', 'Ala', 'Nowakowska', 'pracownik', 7);
-INSERT INTO employee values('83423432223', 'Tomasz', 'Nieznaczący', 'sprzedawca', 8);
-INSERT INTO employee values('24724534145', 'Jakub', 'Koło', 'sprzedawca', 9);
-INSERT INTO employee values('65275472524', 'Sebastian', 'Deska', 'sprzedawca', 1);
-INSERT INTO employee values('63253413131', 'Paulina', 'Wilczyca', 'sprzedawca', 2);
-INSERT INTO employee values('15346346316', 'Ewelina', 'Odlotowa', 'pracownik', 3);
-INSERT INTO employee values('72452154353', 'Karol', 'Wykwit', 'sprzedawca', 4);
-INSERT INTO employee values('62754123144', 'Amadeusz', 'Ptak', 'menager', 5);
-INSERT INTO employee values('16146352244', 'Malina', 'Kwiat', 'sprzedawca', 6);
-INSERT INTO employee values('16154353252', 'Stanisław', 'Domeradzki', 'sprzedawca', 7);
-INSERT INTO employee values('76736452423', 'Krzysztof', 'Lubiany', 'pracownik', 8);
-INSERT INTO employee values('72454424232', 'Wioletta', 'Ostrozna', 'sprzedawca', 9);
-INSERT INTO employee values('89244535255', 'Natalia', 'Elitkna', 'menager', 1);
-INSERT INTO employee values('98753523525', 'Weronika', 'Antyczna', 'sprzedawca', 2);
-INSERT INTO employee values('27257837589', 'Michał', 'Ucziny', 'sprzedawca', 3);
-INSERT INTO employee values('79821179085', 'Ewa', 'Uczona', 'sprzedawca', 4);
-INSERT INTO employee values('79184658551', 'Aleksandra', 'Królweska', 'sprzedawca', 5);
+INSERT INTO employee values('61939237410', 'rzaoczny@bankapp.com', 'Rafał', 'Zaoczny', 'CEO', 4);
+INSERT INTO employee values('23784671911', 'tkowalski@bankapp.com', 'Tomasz', 'Kowalski', 'pracownik', 9);
+INSERT INTO employee values('74382941824', 'onieznany@bankapp.com', 'Oskar', 'Nieznany', 'pracownik', 4);
+INSERT INTO employee values('53247182311', 'mzaciemna@bankapp.com', 'Magdalena', 'Zaciemna', 'menager', 1);
+INSERT INTO employee values('65262457412', 'mnaruszona@bankapp.com', 'Monika', 'Naruszona', 'pracownik', 2);
+INSERT INTO employee values('51436141414', 'awylewny@bankapp.com', 'Andrzej', 'Wylewny', 'menager', 3);
+INSERT INTO employee values('54316346513', 'zodrobiony@bankapp.com', 'Zbigniew', 'Odrobiony', 'pracownik', 4);
+INSERT INTO employee values('52167637614', 'gzegarmistrz@bankapp.com', 'Gerwazy', 'Zegarmistrz', 'sprzedawca', 5);
+INSERT INTO employee values('64275471243', 'akowalska@bankapp.com', 'Ala', 'Kowalska', 'sprzedawca', 6);
+INSERT INTO employee values('76735133245', 'anowakowska@bankapp.com', 'Ala', 'Nowakowska', 'pracownik', 7);
+INSERT INTO employee values('83423432223', 'tnieznaczacy@bankapp.com', 'Tomasz', 'Nieznaczący', 'sprzedawca', 8);
+INSERT INTO employee values('24724534145', 'jkolo@bankapp.com', 'Jakub', 'Koło', 'sprzedawca', 9);
+INSERT INTO employee values('65275472524', 'sdeska@bankapp.com', 'Sebastian', 'Deska', 'sprzedawca', 1);
+INSERT INTO employee values('63253413131', 'pwilczyca@bankapp.com', 'Paulina', 'Wilczyca', 'sprzedawca', 2);
+INSERT INTO employee values('15346346316', 'eodlotowa@bankapp.com', 'Ewelina', 'Odlotowa', 'pracownik', 3);
+INSERT INTO employee values('72452154353', 'kwykwit@bankapp.com', 'Karol', 'Wykwit', 'sprzedawca', 4);
+INSERT INTO employee values('62754123144', 'aptak@bankapp.com', 'Amadeusz', 'Ptak', 'menager', 5);
+INSERT INTO employee values('16146352244', 'mkwiat@bankapp.com', 'Malina', 'Kwiat', 'sprzedawca', 6);
+INSERT INTO employee values('16154353252', 'sdomeradzki@bankapp.com', 'Stanisław', 'Domeradzki', 'sprzedawca', 7);
+INSERT INTO employee values('76736452423', 'klubiany@bankapp.com', 'Krzysztof', 'Lubiany', 'pracownik', 8);
+INSERT INTO employee values('72454424232', 'wostrozna@bankapp.com', 'Wioletta', 'Ostrozna', 'sprzedawca', 9);
+INSERT INTO employee values('89244535255', 'nelitkna@bankapp.com', 'Natalia', 'Elitkna', 'menager', 1);
+INSERT INTO employee values('98753523525', 'wantyczna@bankapp.com', 'Weronika', 'Antyczna', 'sprzedawca', 2);
+INSERT INTO employee values('27257837589', 'mucziny@bankapp.com', 'Michał', 'Ucziny', 'sprzedawca', 3);
+INSERT INTO employee values('79821179085', 'euczona@bankapp.com', 'Ewa', 'Uczona', 'sprzedawca', 4);
+INSERT INTO employee values('79184658551', 'akrolewska@bankapp.com', 'Aleksandra', 'Królweska', 'sprzedawca', 5);
 
 CREATE TABLE client_company
 (
