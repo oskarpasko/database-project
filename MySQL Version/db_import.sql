@@ -376,3 +376,17 @@ BEGIN
 	RETURN suma;	
 END$$
 DELIMITER ;
+
+#############################################################################
+## Funckja logujaca pracownika
+
+DELIMITER $$
+CREATE FUNCTION log_in(email VARCHAR(100), passwd VARCHAR(100)) 
+RETURNS VARCHAR(1)
+DETERMINISTIC
+BEGIN
+	DECLARE temp VARCHAR(1);
+	SELECT COUNT(*) INTO temp FROM employee WHERE employee_email = email AND employee_pesel = passwd;
+	RETURN temp;
+END$$
+DELIMITER ;
