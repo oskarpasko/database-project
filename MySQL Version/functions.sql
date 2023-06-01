@@ -1,6 +1,7 @@
 /*
 Kody dodające funkcje do bazy danych
 dodatkowo są dodane przykłady wywołania ich
+!!!!!! Uruchom plik bez przykładowych wywołań tylko same deklaracje funkcji !!!!!!
 */
 
 #############################################################################
@@ -17,9 +18,6 @@ BEGIN
 END$$
 DELIMITER ;
 
-## Przykłady wywołania
-SELECT client_company_count("Rzeszów")
-
 #############################################################################
 ## Funckja zwracajaca sume wyplat dla pracownikow w poszczegolnej placowce
 
@@ -34,5 +32,7 @@ BEGIN
 END$$
 DELIMITER ;
 
+#############################################################################
 ## Przykłady wywołania
+SELECT client_company_count("Rzeszów")
 SELECT company_salary("Warszawa")
