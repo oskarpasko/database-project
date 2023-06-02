@@ -66,8 +66,19 @@
         <!-- END -->
         <div class="container text-center">
   <div class="row gx-4">
-    <div class="col-lg-4"><div class="border border-light bg-success bg-gradient">col-8</div></div>
-    <div class="col-lg"><div class="border border-light bg-success bg-gradient">col-4</div></div>
+    <div class="col-lg-4"><div class="container gy-4">
+        <div class="row mb-4"><div class="col-sm border border-light bg-success bg-gradient"><button class="btn btn-light m-4 btn-lg showSingle" target="1">OK</div></div>
+        <div class="row mb-4"><div class="col-sm border border-light bg-success bg-gradient"><button class="btn btn-light m-4 btn-lg showSingle" target="2">OK2</div></div>
+        <div class="row mb-4"><div class="col-sm border border-light bg-success bg-gradient"><button class="btn btn-light m-4 btn-lg showSingle" target="3">OK3</div></div>
+        <div class="row"><div class="col-sm border border-light bg-success bg-gradient"><button class="btn btn-light m-4 btn-lg showSingle" target="4">OK4</div></div>
+
+    </div></div>
+    <div class="col-lg"><div class="border border-light bg-success bg-gradient h-100">
+  <div id="div1" class="targetDiv">1</div>
+  <div id="div2" class="targetDiv">2</div>
+  <div id="div3" class="targetDiv">3</div>
+  <div id="div4" class="targetDiv">4</div>
+    </div></div>
 
   </div>
 </div>
@@ -75,5 +86,6 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="../js/main_show.js"></script>
   </body>
 </html>
