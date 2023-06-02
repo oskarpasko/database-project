@@ -9,7 +9,7 @@
         $email = $_POST['email'];
         $passwd = $_POST['password'];
 
-        $sql = ('SELECT * FROM employee WHERE employee_email="'.$email.'" AND employee_pesel="'.$passwd.'"');
+        $sql = ('SELECT log_in("'.$email.'", "'.$passwd.'")');
         $result = $conn->query($sql);
 
         if ($result->num_rows==0) {
