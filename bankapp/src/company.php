@@ -23,8 +23,46 @@
 
     <title>Cards</title>
   </head>
-  <body class="bg-secondary d-flex flex-column min-vh-100">
-
+  <body class="bg-secondary d-flex flex-column min-vh-100 fs-2">
+        
+    <!-- HEADER -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="main.php">Hidden brand</a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="main.php">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="clients.php">Klienci</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="cards.php">Karty</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="overflow.php">Przelewy</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="employee.php">Pracownicy</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="company.php">Budynki</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="position.php">Pozycje</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li> -->
+      </ul>
+    </div>
+  </div>
+</nav>
+        <!-- END -->
   <!----------- CARDS ----------->
   <div class="container mt-5 mb-5 content-height">
         <div class="row">

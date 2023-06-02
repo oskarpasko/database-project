@@ -8,7 +8,7 @@
     <!-- Bootstraps CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
     <!-- Bootstraps JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
@@ -21,9 +21,10 @@
 
     </style>
 
-    <title>Cards</title>
+    <title>MainPage</title>
   </head>
   <body class="bg-secondary d-flex flex-column min-vh-100 fs-2">
+    <!-- <body> -->
         
     <!-- HEADER -->
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
@@ -32,7 +33,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <a class="navbar-brand" href="main.php">Hidden brand</a>
+      <a class="navbar-brand" href="main.php">Hidden brand</a>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="main.php">Home</a>
@@ -63,44 +64,13 @@
   </div>
 </nav>
         <!-- END -->
-  <!----------- CARDS ----------->
-  <div class="container mt-5 mb-5 content-height">
-        <div class="row">
-            <table class="table table-hover bg-white text-center fs-2">
-                    <thead>
-                        <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Send Number</th>
-                        <th scope="col">Recipent Number</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Amount</th>
-                        </tr>
-                    </thead>
-                <tbody>
-            
-                <?php
-                    include '../connect.php';
+        <div class="container text-center">
+  <div class="row gx-4">
+    <div class="col-lg-4"><div class="border border-light bg-success bg-gradient">col-8</div></div>
+    <div class="col-lg"><div class="border border-light bg-success bg-gradient">col-4</div></div>
 
-                    $sql = "SELECT * FROM overflow ORDER BY overflow_data";
-                    $result = $conn->query($sql);
-
-                    if ($result->num_rows > 0) {
-                        $nr=1;
-                    while($row = $result->fetch_assoc()) {
-                        
-                        echo '<tr><th scope="row">'.$nr.'</th><td>'.$row['overflow_send_number'].'</td><td>'.$row['overflow_recipent_number'].'</td><td>'.$row['overflow_data'].'</td><td>'.$row['overflow_amount'].'</td></tr>';
-                        $nr+=1;
-                    }
-                    } else {
-                    echo "0 results";
-                    }
-                    $conn->close();
-                ?> 
-
-                </tbody>
-            </table>
-        </div>
-    </div>
+  </div>
+</div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
