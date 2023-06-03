@@ -58,12 +58,25 @@ BEGIN
 END$$
 DELIMITER ;
 
+
+#############################################################################
+## procedura dodajaca nowego pracownika
+DELIMITER $$
+$$
+CREATE PROCEDURE add_employee (IN pesel varchar(50),IN email varchar(50),IN fname varchar(50),IN lname varchar(50),IN posn varchar(50),IN company INT)
+BEGIN
+    insert into employee values (pesel, email, fname, lname, posn, company);
+END$$
+DELIMITER ;
+
 ## przykładowe wywołania procedury
 CALL company_employee  ('Rzeszów', @emp);
 SELECT @emp;
 
 CALL company_employee  ('Warszawa', @emp);
 SELECT @emp;
+
+CALL add_employee('61931237410', 'testtest@bankapp.com', 'Test', 'Test', 'CEO', 4);
 
 CALL company_employee  ('Kraków', @emp);
 SELECT @emp;
