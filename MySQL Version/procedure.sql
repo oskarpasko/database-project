@@ -83,7 +83,7 @@ DELIMITER ;
 ## procedura dodajaca nowa karte
 DELIMITER $$
 $$
-CREATE PROCEDURE add_card (IN nr varchar(16),IN term_data DATE,IN cvc varchar(3),IN card_type ENUM('Debetowa', 'Kredytowa'),IN balance INT, IN client VARCHAR(6))
+CREATE PROCEDURE add_card (IN nr varchar(16),IN term_data DATE,IN cvc varchar(3),IN card_type ENUM('Debetowa', 'Kredytowa'),IN balance FLOAT, IN client VARCHAR(6))
 BEGIN
     insert into card values (nr, term_data, cvc, card_type, balance, client);
 END$$
