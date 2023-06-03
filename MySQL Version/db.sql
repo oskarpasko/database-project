@@ -31,7 +31,7 @@ CREATE TABLE card
     card_term_data DATE NOT NULL,
     card_cvc_number VARCHAR(3) NOT NULL CHECK(char_length(card_cvc_number)=3),
     card_type ENUM('Debetowa', 'Kredytowa'),
-    card_balance FLOAT NOT NULL,
+    card_balance DECIMAL(11,2) NOT NULL,
     client_nr VARCHAR(6) NOT NULL,
     FOREIGN KEY (client_nr) REFERENCES client (client_nr)
 );
@@ -53,7 +53,7 @@ CREATE TABLE overflow
     overflow_send_number VARCHAR(16) NOT NULL CHECK(char_length(overflow_send_number)=16),
     overflow_recipent_number VARCHAR(16) NOT NULL CHECK(char_length(overflow_recipent_number)=16),
     overflow_data DATE NOT NULL,
-    overflow_amount FLOAT NOT NULL,
+    overflow_amount DECIMAL(11,2) NOT NULL,
     
     FOREIGN KEY (overflow_send_number) REFERENCES card (card_nr),
     FOREIGN KEY (overflow_recipent_number) REFERENCES card (card_nr)
@@ -182,7 +182,7 @@ INSERT INTO company values(null, 'Berlin', 'Nazwana', '13', '23-153');
 CREATE TABLE positions
 (
     position_name VARCHAR(100) UNIQUE PRIMARY KEY NOT NULL,
-    position_salary FLOAT NOT NULL CHECK(position_salary >= 2200.0)
+    position_salary DECIMAL(7,2) NOT NULL CHECK(position_salary >= 2200.0)
 );
 
 INSERT INTO positions values('pracownik', 2200.0);
