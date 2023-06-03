@@ -69,6 +69,16 @@ BEGIN
 END$$
 DELIMITER ;
 
+#############################################################################
+## procedura dodajaca nowego pracownika
+DELIMITER $$
+$$
+CREATE PROCEDURE add_client (IN nr varchar(50),IN passwd varchar(50),IN fname varchar(50),IN lname varchar(50))
+BEGIN
+    insert into client values (nr, passwd, fname, lname);
+END$$
+DELIMITER ;
+
 ## przykładowe wywołania procedury
 CALL company_employee  ('Rzeszów', @emp);
 SELECT @emp;
@@ -77,6 +87,7 @@ CALL company_employee  ('Warszawa', @emp);
 SELECT @emp;
 
 CALL add_employee('61931237410', 'testtest@bankapp.com', 'Test', 'Test', 'CEO', 4);
+CALL add_client('111111', 'trudnehaslo', 'testowe', 'konto') 
 
 CALL company_employee  ('Kraków', @emp);
 SELECT @emp;
