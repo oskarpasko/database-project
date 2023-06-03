@@ -206,32 +206,32 @@ CREATE TABLE employee
     FOREIGN KEY (employee_company) REFERENCES company(company_id)
 );
 
-INSERT INTO employee values('61939237410', 'rzaoczny@bankapp.com', 'Rafał', 'Zaoczny', 'CEO', 4);
-INSERT INTO employee values('23784671911', 'tkowalski@bankapp.com', 'Tomasz', 'Kowalski', 'pracownik', 9);
-INSERT INTO employee values('74382941824', 'onieznany@bankapp.com', 'Oskar', 'Nieznany', 'pracownik', 4);
-INSERT INTO employee values('53247182311', 'mzaciemna@bankapp.com', 'Magdalena', 'Zaciemna', 'menager', 1);
-INSERT INTO employee values('65262457412', 'mnaruszona@bankapp.com', 'Monika', 'Naruszona', 'pracownik', 2);
-INSERT INTO employee values('51436141414', 'awylewny@bankapp.com', 'Andrzej', 'Wylewny', 'menager', 3);
-INSERT INTO employee values('54316346513', 'zodrobiony@bankapp.com', 'Zbigniew', 'Odrobiony', 'pracownik', 4);
-INSERT INTO employee values('52167637614', 'gzegarmistrz@bankapp.com', 'Gerwazy', 'Zegarmistrz', 'sprzedawca', 5);
-INSERT INTO employee values('64275471243', 'akowalska@bankapp.com', 'Ala', 'Kowalska', 'sprzedawca', 6);
-INSERT INTO employee values('76735133245', 'anowakowska@bankapp.com', 'Ala', 'Nowakowska', 'pracownik', 7);
-INSERT INTO employee values('83423432223', 'tnieznaczacy@bankapp.com', 'Tomasz', 'Nieznaczący', 'sprzedawca', 8);
-INSERT INTO employee values('24724534145', 'jkolo@bankapp.com', 'Jakub', 'Koło', 'sprzedawca', 9);
-INSERT INTO employee values('65275472524', 'sdeska@bankapp.com', 'Sebastian', 'Deska', 'sprzedawca', 1);
-INSERT INTO employee values('63253413131', 'pwilczyca@bankapp.com', 'Paulina', 'Wilczyca', 'sprzedawca', 2);
-INSERT INTO employee values('15346346316', 'eodlotowa@bankapp.com', 'Ewelina', 'Odlotowa', 'pracownik', 3);
-INSERT INTO employee values('72452154353', 'kwykwit@bankapp.com', 'Karol', 'Wykwit', 'sprzedawca', 4);
-INSERT INTO employee values('62754123144', 'aptak@bankapp.com', 'Amadeusz', 'Ptak', 'menager', 5);
-INSERT INTO employee values('16146352244', 'mkwiat@bankapp.com', 'Malina', 'Kwiat', 'sprzedawca', 6);
-INSERT INTO employee values('16154353252', 'sdomeradzki@bankapp.com', 'Stanisław', 'Domeradzki', 'sprzedawca', 7);
-INSERT INTO employee values('76736452423', 'klubiany@bankapp.com', 'Krzysztof', 'Lubiany', 'pracownik', 8);
-INSERT INTO employee values('72454424232', 'wostrozna@bankapp.com', 'Wioletta', 'Ostrozna', 'sprzedawca', 9);
-INSERT INTO employee values('89244535255', 'nelitkna@bankapp.com', 'Natalia', 'Elitkna', 'menager', 1);
-INSERT INTO employee values('98753523525', 'wantyczna@bankapp.com', 'Weronika', 'Antyczna', 'sprzedawca', 2);
-INSERT INTO employee values('27257837589', 'mucziny@bankapp.com', 'Michał', 'Ucziny', 'sprzedawca', 3);
-INSERT INTO employee values('79821179085', 'euczona@bankapp.com', 'Ewa', 'Uczona', 'sprzedawca', 4);
-INSERT INTO employee values('79184658551', 'akrolewska@bankapp.com', 'Aleksandra', 'Królweska', 'sprzedawca', 5);
+INSERT INTO employee values('61939237410', 'Rafał', 'Zaoczny', 'CEO', 4);
+INSERT INTO employee values('23784671911', 'Tomasz', 'Kowalski', 'pracownik', 9);
+INSERT INTO employee values('74382941824', 'Oskar', 'Nieznany', 'pracownik', 4);
+INSERT INTO employee values('53247182311', 'Magdalena', 'Zaciemna', 'menager', 1);
+INSERT INTO employee values('65262457412', 'Monika', 'Naruszona', 'pracownik', 2);
+INSERT INTO employee values('51436141414', 'Andrzej', 'Wylewny', 'menager', 3);
+INSERT INTO employee values('54316346513', 'Zbigniew', 'Odrobiony', 'pracownik', 4);
+INSERT INTO employee values('52167637614', 'Gerwazy', 'Zegarmistrz', 'sprzedawca', 5);
+INSERT INTO employee values('64275471243', 'Ala', 'Kowalska', 'sprzedawca', 6);
+INSERT INTO employee values('76735133245', 'Ala', 'Nowakowska', 'pracownik', 7);
+INSERT INTO employee values('83423432223', 'Tomasz', 'Nieznaczący', 'sprzedawca', 8);
+INSERT INTO employee values('24724534145', 'Jakub', 'Koło', 'sprzedawca', 9);
+INSERT INTO employee values('65275472524', 'Sebastian', 'Deska', 'sprzedawca', 1);
+INSERT INTO employee values('63253413131', 'Paulina', 'Wilczyca', 'sprzedawca', 2);
+INSERT INTO employee values('15346346316', 'Ewelina', 'Odlotowa', 'pracownik', 3);
+INSERT INTO employee values('72452154353', 'Karol', 'Wykwit', 'sprzedawca', 4);
+INSERT INTO employee values('62754123144', 'Amadeusz', 'Ptak', 'menager', 5);
+INSERT INTO employee values('16146352244', 'Malina', 'Kwiat', 'sprzedawca', 6);
+INSERT INTO employee values('16154353252', 'Stanisław', 'Domeradzki', 'sprzedawca', 7);
+INSERT INTO employee values('76736452423', 'Krzysztof', 'Lubiany', 'pracownik', 8);
+INSERT INTO employee values('72454424232', 'Wioletta', 'Ostrozna', 'sprzedawca', 9);
+INSERT INTO employee values('89244535255', 'Natalia', 'Elitkna', 'menager', 1);
+INSERT INTO employee values('98753523525', 'Weronika', 'Antyczna', 'sprzedawca', 2);
+INSERT INTO employee values('27257837589', 'Michał', 'Ucziny', 'sprzedawca', 3);
+INSERT INTO employee values('79821179085', 'Ewa', 'Uczona', 'sprzedawca', 4);
+INSERT INTO employee values('79184658551', 'Aleksandra', 'Królweska', 'sprzedawca', 5);
 
 CREATE TABLE client_company
 (
@@ -249,9 +249,7 @@ INSERT INTO client_company values('654321', 3);
 INSERT INTO client_company values('923860', 6);
 INSERT INTO client_company values('015348', 4);
 
-/*
-Kody dodające widoki do bazy danych
-*/
+# Kody dodające widoki do bazy danych
 
 ##  card_client view
 CREATE VIEW card_client AS
@@ -343,6 +341,115 @@ LEFT JOIN client USING(client_nr)
 LEFT JOIN company USING(company_id)
 ORDER BY company_city;
 
+## wplace pracownikow
+CREATE view place AS
+SELECT employee_email, employee_fname, employee_lname, position_salary as placa_netto, brutto(position_salary, 0.17) as placa_brutto, position_name
+FROM employee
+LEFT JOIN positions 
+ON employee_position = position_name
+order by placa_brutto;
+
+/*
+Kody dodające procedury do bazy danych
+dodatkowo są dodane przykłady wywołania procedur
+*/
+
+#############################################################################
+## procedura licząca pracowników na konkretnych stanowiskach
+DELIMITER $$
+$$
+CREATE PROCEDURE bankapp.employ(IN employy VARCHAR(20), OUT emp INT)
+BEGIN
+	SELECT COUNT(*) INTO emp FROM bankapp.employee
+	WHERE employee_position  = employy;
+END$$
+DELIMITER ;
+
+## przykładowe wywołania procedury
+CALL employ('sprzedawca', @emp);
+SELECT @emp;
+
+CALL employ('kierownik', @emp);
+SELECT @emp;
+
+CALL employ('ceo', @emp);
+SELECT @emp;
+
+CALL employ('menager', @emp);
+SELECT @emp;
+
+#############################################################################
+## procedura liczaca ilosc wykonanych przelewow przez danego klienta
+DELIMITER $$
+$$
+CREATE PROCEDURE bankapp.client_overflow(IN cli CHAR(6), OUT emp INT)
+BEGIN
+	SELECT COUNT(*) INTO emp FROM detailed_overflow
+	WHERE client_nr  = cli;
+END$$
+DELIMITER ;
+
+## przykładowe wywołania procedury
+CALL client_overflow ('123456', @emp);
+SELECT @emp;
+
+CALL client_overflow ('654321', @emp);
+SELECT @emp;
+
+#############################################################################
+## procedura liczaca ilosc pracownikow w kazdym miescie
+DELIMITER $$
+$$
+CREATE PROCEDURE bankapp.company_employee(IN city VARCHAR(20), OUT emp INT)
+BEGIN
+	SELECT COUNT(*) INTO emp FROM company
+	JOIN employee
+	ON employee.employee_company = company.company_id 
+	WHERE company_city = city;
+END$$
+DELIMITER ;
+
+
+#############################################################################
+## procedura dodajaca nowego pracownika
+DELIMITER $$
+$$
+CREATE PROCEDURE add_employee (IN pesel varchar(11),IN email varchar(50),IN fname varchar(50),IN lname varchar(50),IN posn varchar(50),IN company INT)
+BEGIN
+    insert into employee values (pesel, email, fname, lname, posn, company);
+END$$
+DELIMITER ;
+
+#############################################################################
+## procedura dodajaca nowego klienta
+DELIMITER $$
+$$
+CREATE PROCEDURE add_client (IN nr varchar(6),IN passwd varchar(50),IN fname varchar(50),IN lname varchar(50))
+BEGIN
+    insert into client values (nr, passwd, fname, lname);
+END$$
+DELIMITER ;
+
+#############################################################################
+## procedura dodajaca nowa karte
+DELIMITER $$
+$$
+CREATE PROCEDURE add_card (IN nr varchar(16),IN term_data DATE,IN cvc varchar(3),IN card_type ENUM('Debetowa', 'Kredytowa'),IN balance FLOAT, IN client VARCHAR(6))
+BEGIN
+    insert into card values (nr, term_data, cvc, card_type, balance, client);
+END$$
+DELIMITER ;
+
+#############################################################################
+## procedura dodajaca nowa pozycje
+DELIMITER $$
+$$
+CREATE PROCEDURE add_position (IN name varchar(16),IN salary FLOAT)
+BEGIN
+    insert into positions values (name, salary);
+END$$
+DELIMITER ;
+
 /*
 Kody dodające funkcje do bazy danych
 dodatkowo są dodane przykłady wywołania ich
@@ -387,6 +494,20 @@ DETERMINISTIC
 BEGIN
 	DECLARE temp VARCHAR(1);
 	SELECT COUNT(*) INTO temp FROM employee WHERE employee_email = email AND employee_pesel = passwd;
+	RETURN temp;
+END$$
+DELIMITER ;
+
+#############################################################################
+## Funckja obliczajace wartosc brutto
+
+DELIMITER $$
+CREATE FUNCTION brutto(balance DECIMAL(11,2), tax FLOAT) 
+RETURNS DECIMAL(11,2)
+DETERMINISTIC
+BEGIN
+	DECLARE temp DECIMAL(7,2);
+	set temp = balance + (balance * cast(tax as decimal(7,2)));
 	RETURN temp;
 END$$
 DELIMITER ;
