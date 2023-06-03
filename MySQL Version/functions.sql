@@ -47,7 +47,22 @@ END$$
 DELIMITER ;
 
 #############################################################################
+## Funckja obliczajace wartosc brutto
+
+DELIMITER $$
+CREATE FUNCTION brutto(balance DECIMAL(11,2), tax FLOAT) 
+RETURNS DECIMAL(11,2)
+DETERMINISTIC
+BEGIN
+	DECLARE temp DECIMAL(7,2);
+	set temp = balance + (balance * cast(tax as decimal(7,2)));
+	RETURN temp;
+END$$
+DELIMITER ;
+
+#############################################################################
 ## Przykłady wywołania
 SELECT client_company_count("Rzeszów")
 SELECT company_salary("Warszawa")
 SELECT log_in("rzaoczny@bankapp.com", "61939237410")
+SELECT brutto(1000.0, 0.17)
