@@ -1,8 +1,12 @@
+jQuery('.targetDiv').removeClass("d-flex");
 jQuery('.targetDiv').hide();
 jQuery('#div1').show();
+jQuery('#div1').addClass("d-flex");
 jQuery(function(){
    jQuery('.showSingle').click(function(){
          jQuery('.targetDiv').hide();
+         jQuery('.targetDiv').removeClass("d-flex");
          jQuery('#div'+$(this).attr('target')).show();
+         jQuery('#div'+$(this).attr('target')).addClass("d-flex");
    });
 });
