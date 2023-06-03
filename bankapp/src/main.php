@@ -138,48 +138,64 @@
           </div>
 
           <div id="div2" class="targetDiv d-flex justify-content-center p-5">
-            <form class="w-50 align-self-center">
+            <form method="post" action="../php_scripts/add_employee.php" class="w-50 align-self-center">
               <div class="form-group row ">
                 <label for="input_emp_email" class="col-sm col-form-label">Email</label>
                 <div class="col-sm-8">
-                  <input type="email" class="form-control" id="input_emp_email" placeholder="Email">
+                  <input type="email" class="form-control" id="input_emp_email" name="email" placeholder="Email">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="input_emp_fname" class="col-sm col-form-label">Imię</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="input_emp_fname" placeholder="Imię">
+                  <input type="text" class="form-control" id="input_emp_fname" name="lname" placeholder="Imię">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="input_emp_lname" class="col-sm col-form-label">Nazwisko</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="input_emp_lname" placeholder="Nazwiskoo">
+                  <input type="text" class="form-control" id="input_emp_lname" name="fname" placeholder="Nazwiskoo">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="input_emp_pesel" class="col-sm col-form-label">PESEL</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="input_emp_pesel" placeholder="PESEL">
+                  <input type="text" class="form-control" id="input_emp_pesel" name="pesel" placeholder="PESEL">
                 </div>
               </div>
               <div class="form-group row">
-                <select class="form-select" id="inputGroupSelect01">
+                <select class="form-select" id="inputGroupSelect01" name="position">
                   <option selected>Pozycja...</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <?php 
+                    include '../connect.php';
+                    $sql = ('SELECT position_name FROM positions ORDER BY position_name;');
+                    $result = $conn->query($sql);
+                    while($row = $result->fetch_row())
+                    {
+                      echo'<option value="'.$row[0].'">'.$row[0].'</option>';
+                    }
+                  ?>
                 </select>
               </div>
               <div class="form-group row">
-                <select class="form-select" id="inputGroupSelect02">
+                <select class="form-select" id="inputGroupSelect02" name="company">
                   <option selected>Firma...</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <?php 
+                    include '../connect.php';
+                    $sql = ('SELECT * FROM company ORDER BY company_city, company_street;');
+                    $result = $conn->query($sql);
+                    while($row = $result->fetch_row())
+                    {
+                      echo'<option value="'.$row[0].'">'.$row[1].', ul. '.$row[2].' '.$row[3].' - '.$row[4].'</option>';
+                    }
+                  ?>
                 </select>
               </div>
               <button type="submit" class="btn btn-danger btn-lg">Dodaj pracownika</button>
+              <?php 
+                if(isset($_SESSION['success_emp'])) echo $_SESSION['success_emp']; 
+                unset($_SESSION['success_emp']);
+              ?>
             </form>
           </div>
 
