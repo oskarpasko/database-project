@@ -63,19 +63,29 @@ DELIMITER ;
 ## procedura dodajaca nowego pracownika
 DELIMITER $$
 $$
-CREATE PROCEDURE add_employee (IN pesel varchar(50),IN email varchar(50),IN fname varchar(50),IN lname varchar(50),IN posn varchar(50),IN company INT)
+CREATE PROCEDURE add_employee (IN pesel varchar(11),IN email varchar(50),IN fname varchar(50),IN lname varchar(50),IN posn varchar(50),IN company INT)
 BEGIN
     insert into employee values (pesel, email, fname, lname, posn, company);
 END$$
 DELIMITER ;
 
 #############################################################################
-## procedura dodajaca nowego pracownika
+## procedura dodajaca nowego klienta
 DELIMITER $$
 $$
-CREATE PROCEDURE add_client (IN nr varchar(50),IN passwd varchar(50),IN fname varchar(50),IN lname varchar(50))
+CREATE PROCEDURE add_client (IN nr varchar(6),IN passwd varchar(50),IN fname varchar(50),IN lname varchar(50))
 BEGIN
     insert into client values (nr, passwd, fname, lname);
+END$$
+DELIMITER ;
+
+#############################################################################
+## procedura dodajaca nowa karte
+DELIMITER $$
+$$
+CREATE PROCEDURE add_card (IN nr varchar(16),IN term_data DATE,IN cvc varchar(3),IN card_type ENUM('Debetowa', 'Kredytowa'),IN balance INT, IN client VARCHAR(6))
+BEGIN
+    insert into card values (nr, term_data, cvc, card_type, balance, client);
 END$$
 DELIMITER ;
 
@@ -87,15 +97,8 @@ CALL company_employee  ('Warszawa', @emp);
 SELECT @emp;
 
 CALL add_employee('61931237410', 'testtest@bankapp.com', 'Test', 'Test', 'CEO', 4);
-CALL add_client('111111', 'trudnehaslo', 'testowe', 'konto') 
+CALL add_client('111111', 'trudnehaslo', 'testowe', 'konto');
+CALL add_card('1111111111111111', '2025-03-03', '420', 'Debetowa', 0.0, '111111'); 
 
 CALL company_employee  ('Kraków', @emp);
 SELECT @emp;
-
-
-#############################################################################
-## Funkcja liczaca ilosc zadluzonych osob 
-#############################################################################
-## Procedury CRUDowe
-## Funkcja logujaca klienta
-## Funkcja wyswietlja czy klient jest zadluzony czy nie 
