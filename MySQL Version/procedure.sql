@@ -14,19 +14,6 @@ BEGIN
 END$$
 DELIMITER ;
 
-## przykładowe wywołania procedury
-CALL employ('sprzedawca', @emp);
-SELECT @emp;
-
-CALL employ('kierownik', @emp);
-SELECT @emp;
-
-CALL employ('ceo', @emp);
-SELECT @emp;
-
-CALL employ('menager', @emp);
-SELECT @emp;
-
 #############################################################################
 ## procedura liczaca ilosc wykonanych przelewow przez danego klienta
 DELIMITER $$
@@ -37,13 +24,6 @@ BEGIN
 	WHERE client_nr  = cli;
 END$$
 DELIMITER ;
-
-## przykładowe wywołania procedury
-CALL client_overflow ('123456', @emp);
-SELECT @emp;
-
-CALL client_overflow ('654321', @emp);
-SELECT @emp;
 
 #############################################################################
 ## procedura liczaca ilosc pracownikow w kazdym miescie
@@ -103,10 +83,10 @@ DELIMITER ;
 CALL company_employee  ('Rzeszów', @emp);
 SELECT @emp;
 
-CALL company_employee  ('Warszawa', @emp);
+CALL client_overflow ('654321', @emp);
 SELECT @emp;
 
-CALL company_employee  ('Kraków', @emp);
+CALL employ('sprzedawca', @emp);
 SELECT @emp;
 
 CALL add_employee('61931237410', 'testtest@bankapp.com', 'Test', 'Test', 'CEO', 4);
