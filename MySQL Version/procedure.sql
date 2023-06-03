@@ -89,6 +89,16 @@ BEGIN
 END$$
 DELIMITER ;
 
+#############################################################################
+## procedura dodajaca nowa pozycje
+DELIMITER $$
+$$
+CREATE PROCEDURE add_position (IN name varchar(16),IN salary FLOAT)
+BEGIN
+    insert into positions values (name, salary);
+END$$
+DELIMITER ;
+
 ## przykładowe wywołania procedury
 CALL company_employee  ('Rzeszów', @emp);
 SELECT @emp;
@@ -96,9 +106,10 @@ SELECT @emp;
 CALL company_employee  ('Warszawa', @emp);
 SELECT @emp;
 
+CALL company_employee  ('Kraków', @emp);
+SELECT @emp;
+
 CALL add_employee('61931237410', 'testtest@bankapp.com', 'Test', 'Test', 'CEO', 4);
 CALL add_client('111111', 'trudnehaslo', 'testowe', 'konto');
 CALL add_card('1111111111111111', '2025-03-03', '420', 'Debetowa', 0.0, '111111'); 
-
-CALL company_employee  ('Kraków', @emp);
-SELECT @emp;
+CALL add_position('kurier', '2345.00') ;
