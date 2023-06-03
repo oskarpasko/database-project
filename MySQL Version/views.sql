@@ -89,11 +89,3 @@ FROM client_company
 LEFT JOIN client USING(client_nr)
 LEFT JOIN company USING(company_id)
 ORDER BY company_city;
-
-## wplace pracownikow
-CREATE view place AS
-SELECT employee_email, employee_fname, employee_lname, position_salary as placa_netto, brutto(position_salary, 0.17) as placa_brutto, position_name
-FROM employee
-LEFT JOIN positions 
-ON employee_position = position_name
-order by placa_brutto;
