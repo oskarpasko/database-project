@@ -185,40 +185,25 @@
 
 
           <div id="div3" class="targetDiv d-flex justify-content-center p-5">
-          <form class="w-50 align-self-center">
-              <div class="form-group row ">
-                <label for="input_card_nr" class="col-sm col-form-label">Nr Karty</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id="input_card_nr" placeholder="Nr Karty">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="input_card_date" class="col-sm col-form-label">Data Wygaśnięcia</label>
-                <div class="col-sm-8">
-                  <input type="date" class="form-control" id="input_card_date" placeholder="Data">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="input_card_cvc" class="col-sm col-form-label">CVC</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id="input_card_cvc" placeholder="CVC">
-                </div>
-              </div>
+          <form method="post" action="../php_scripts/add_card.php" name="add_card" class="w-50 align-self-center">
               <div class="form-group row">
                 <label for="input_card_client" class="col-sm col-form-label">Numer Klienta</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="input_card_client" placeholder="Numer Klienta">
+                  <input type="text" class="form-control" id="input_card_client" name="client_nr" placeholder="Numer Klienta">
                 </div>
               </div>
               <div class="form-group row">
-                <select class="form-select" id="input_card_type">
+                <select class="form-select" id="input_card_type" name="type">
                   <option selected>Typ karty</option>
                   <option value="1">Debetowa</option>
                   <option value="2">Kredytowa</option>
                 </select>
               </div>
-
               <button type="submit" class="btn btn-danger btn-lg">Dodaj kartę</button>
+              <?php 
+                if(isset($_SESSION['success_card'])) echo $_SESSION['success_card']; 
+                unset($_SESSION['success_card']);
+              ?>
             </form>
           </div>
           <div id="div4" class="targetDiv">4</div>
