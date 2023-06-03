@@ -1,3 +1,7 @@
+<?php 
+  session_start(); 
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -100,26 +104,36 @@
         <div class="border border-light bg-success bg-gradient">
 
           <div id="div1" class="targetDiv d-flex justify-content-center p-5">
-            <form class="w-50 align-self-center">
+            <form method="post" action="../php_scripts/add_client.php" name="add_client" class="w-50 align-self-center">
               <div class="form-group row ">
                 <label for="input_clienr" class="col-sm col-form-label">Nr Klienta</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="input_clientnr" placeholder="Nr Klienta">
+                  <input type="text" class="form-control" id="input_clientnr" name="client_nr" placeholder="Nr Klienta">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="input_fname" class="col-sm col-form-label">Imię</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="input_fname" placeholder="Imię">
+                  <input type="text" class="form-control" id="input_fname" name="fname" placeholder="Imię">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="input_lname" class="col-sm col-form-label">Nazwisko</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="input_lname" placeholder="Nazwisko">
+                  <input type="text" class="form-control" id="input_lname" name="lname" placeholder="Nazwisko">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="input_fname" class="col-sm col-form-label">Hasło</label>
+                <div class="col-sm-8">
+                  <input type="password" class="form-control" id="input_fname" name="passwd" placeholder="Hasło">
                 </div>
               </div>
               <button type="submit" class="btn btn-danger btn-lg">Dodaj Klienta</button>
+              <?php 
+                if(isset($_SESSION['success_client'])) echo $_SESSION['success_client']; 
+                unset($_SESSION['success_client']);
+              ?>
             </form>
           </div>
 
