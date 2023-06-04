@@ -89,3 +89,12 @@ FROM client_company
 LEFT JOIN client USING(client_nr)
 LEFT JOIN company USING(company_id)
 ORDER BY company_city;
+
+## wysłane przelewy
+create view send_overflows as
+select *
+from overflow
+left join card 
+on overflow_send_number = card_nr
+left join client 
+using(client_nr)
