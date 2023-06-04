@@ -1,5 +1,5 @@
-<?php 
-  session_start(); 
+<?php
+session_start();
 ?>
 
 <!doctype html>
@@ -79,25 +79,29 @@
         <div class="container gy-4">
           <div class="row mb-4">
             <div class="col-sm border border-light bg-success bg-gradient">
-              <button class="btn btn-danger m-4 btn-lg showSingle" target="1">Dodaj Klienta
+              <button class="btn btn-danger m-4 btn-lg showSingle" target="1">Dodaj Klienta</button>
             </div>
           </div>
           <div class="row mb-4">
             <div class="col-sm border border-light bg-success bg-gradient">
-              <button class="btn btn-danger m-4 btn-lg showSingle" target="2">Dodaj pracownika
+              <button class="btn btn-danger m-4 btn-lg showSingle" target="2">Dodaj pracownika</button>
             </div>
           </div>
           <div class="row mb-4">
             <div class="col-sm border border-light bg-success bg-gradient">
-              <button class="btn btn-danger m-4 btn-lg showSingle" target="3">Dodaj kartę
+              <button class="btn btn-danger m-4 btn-lg showSingle" target="3">Dodaj kartę</button>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-sm border border-light bg-success bg-gradient">
+              <button class="btn btn-danger m-4 btn-lg showSingle" target="4">Tabela</button>
             </div>
           </div>
           <div class="row">
             <div class="col-sm border border-light bg-success bg-gradient">
-              <button class="btn btn-danger m-4 btn-lg showSingle" target="4">OK4
+              <button class="btn btn-danger m-4 btn-lg showSingle" target="5">Wynik</button>
             </div>
           </div>
-
         </div>
       </div>
       <div class="col-lg">
@@ -130,9 +134,9 @@
                 </div>
               </div>
               <button type="submit" class="btn btn-danger btn-lg">Dodaj Klienta</button>
-              <?php 
-                if(isset($_SESSION['success_client'])) echo $_SESSION['success_client']; 
-                unset($_SESSION['success_client']);
+              <?php
+              if (isset($_SESSION['success_client'])) echo $_SESSION['success_client'];
+              unset($_SESSION['success_client']);
               ?>
             </form>
           </div>
@@ -166,42 +170,40 @@
               <div class="form-group row">
                 <select class="form-select" id="inputGroupSelect01" name="position">
                   <option selected>Pozycja...</option>
-                  <?php 
-                    include '../connect.php';
-                    $sql = ('SELECT position_name FROM positions ORDER BY position_name;');
-                    $result = $conn->query($sql);
-                    while($row = $result->fetch_row())
-                    {
-                      echo'<option value="'.$row[0].'">'.$row[0].'</option>';
-                    }
+                  <?php
+                  include '../connect.php';
+                  $sql = ('SELECT position_name FROM positions ORDER BY position_name;');
+                  $result = $conn->query($sql);
+                  while ($row = $result->fetch_row()) {
+                    echo '<option value="' . $row[0] . '">' . $row[0] . '</option>';
+                  }
                   ?>
                 </select>
               </div>
               <div class="form-group row">
                 <select class="form-select" id="inputGroupSelect02" name="company">
                   <option selected>Firma...</option>
-                  <?php 
-                    include '../connect.php';
-                    $sql = ('SELECT * FROM company ORDER BY company_city, company_street;');
-                    $result = $conn->query($sql);
-                    while($row = $result->fetch_row())
-                    {
-                      echo'<option value="'.$row[0].'">'.$row[1].', ul. '.$row[2].' '.$row[3].' - '.$row[4].'</option>';
-                    }
+                  <?php
+                  include '../connect.php';
+                  $sql = ('SELECT * FROM company ORDER BY company_city, company_street;');
+                  $result = $conn->query($sql);
+                  while ($row = $result->fetch_row()) {
+                    echo '<option value="' . $row[0] . '">' . $row[1] . ', ul. ' . $row[2] . ' ' . $row[3] . ' - ' . $row[4] . '</option>';
+                  }
                   ?>
                 </select>
               </div>
               <button type="submit" class="btn btn-danger btn-lg">Dodaj pracownika</button>
-              <?php 
-                if(isset($_SESSION['success_emp'])) echo $_SESSION['success_emp']; 
-                unset($_SESSION['success_emp']);
+              <?php
+              if (isset($_SESSION['success_emp'])) echo $_SESSION['success_emp'];
+              unset($_SESSION['success_emp']);
               ?>
             </form>
           </div>
 
 
           <div id="div3" class="targetDiv d-flex justify-content-center p-5">
-          <form method="post" action="../php_scripts/add_card.php" name="add_card" class="w-50 align-self-center">
+            <form method="post" action="../php_scripts/add_card.php" name="add_card" class="w-50 align-self-center">
               <div class="form-group row">
                 <label for="input_card_client" class="col-sm col-form-label">Numer Klienta</label>
                 <div class="col-sm-8">
@@ -216,13 +218,49 @@
                 </select>
               </div>
               <button type="submit" class="btn btn-danger btn-lg">Dodaj kartę</button>
-              <?php 
-                if(isset($_SESSION['success_card'])) echo $_SESSION['success_card']; 
-                unset($_SESSION['success_card']);
+              <?php
+              if (isset($_SESSION['success_card'])) echo $_SESSION['success_card'];
+              unset($_SESSION['success_card']);
               ?>
             </form>
           </div>
-          <div id="div4" class="targetDiv">4</div>
+          <div id="div4" class="targetDiv d-flex justify-content-center p-5">
+            <table class="table table-hover table-light">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody class="tbody-light">
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+            </table>
+          </div>
+          <div id="div5" class="targetDiv d-flex flex-column justify-content-center p-5">
+            <p class="text-center fs-1"><span class="badge bg-danger fw-bold mr-3">Label</span>Text</p></br>
+            <p class="text-center fs-1"><span class="badge bg-danger fw-bold mr-3">Label</span>Text</p></br>
+            <p class="text-center fs-1"><span class="badge bg-danger fw-bold mr-3">Label</span>Text</p></br>
+
+          </div>
         </div>
       </div>
 
