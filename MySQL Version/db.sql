@@ -18,7 +18,7 @@ CREATE TABLE client
     client_password VARCHAR(100) NOT NULL,
     client_fname VARCHAR(100) NOT NULL,
     client_lname VARCHAR(100) NOT NULL
-);
+)ENGINE=InnoDB;
 
 INSERT INTO client values('123456', 'adminadmin', 'Admin', 'Admin');
 INSERT INTO client values('654321', 'testtest', 'Test', 'Test');
@@ -32,9 +32,14 @@ CREATE TABLE card
     card_cvc_number VARCHAR(3) NOT NULL CHECK(char_length(card_cvc_number)=3),
     card_type ENUM('Debetowa', 'Kredytowa'),
     card_balance DECIMAL(11,2) NOT NULL,
-    client_nr VARCHAR(6) NOT NULL,
-    FOREIGN KEY (client_nr) REFERENCES client (client_nr)
-);
+    client_nr VARCHAR(6) NOT NULL CHECK(char_length(client_nr) = 6),
+    
+    FOREIGN KEY (client_nr)
+    REFERENCES client(client_nr)
+    ON UPDATE CASCADE 
+    ON DELETE RESTRICT
+)ENGINE=InnoDB;
+
 
 INSERT INTO card values('1234567890123456', '2026-03-02', '123', 'Debetowa', 128.0, '123456');
 INSERT INTO card values('6543210987654321', '2023-02-02', '321', 'Kredytowa', -105.34,  '123456');
@@ -55,9 +60,17 @@ CREATE TABLE overflow
     overflow_data DATE NOT NULL,
     overflow_amount DECIMAL(11,2) NOT NULL,
     
-    FOREIGN KEY (overflow_send_number) REFERENCES card (card_nr),
-    FOREIGN KEY (overflow_recipent_number) REFERENCES card (card_nr)
-);
+    FOREIGN KEY (overflow_send_number) 
+    REFERENCES card (card_nr)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION,
+    
+    
+    FOREIGN KEY (overflow_recipent_number) 
+    REFERENCES card (card_nr)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION
+)ENGINE=InnoDB;
 
 INSERT INTO overflow values(null, '1234567890123456', '6543210987654321', '2022-06-21', 293.00);
 INSERT INTO overflow values(null, '6543210987654321', '1957463518203058', '2022-02-11', -12.93);
@@ -167,7 +180,7 @@ CREATE TABLE company
     company_street VARCHAR(255) NOT NULL,
     company_nr VARCHAR(5) NOT NULL,
     company_post_code VARCHAR(6) NOT NULL CHECK(char_length(company_post_code)=6)
-);
+)ENGINE=InnoDB;
 
 INSERT INTO company values(null, 'Rzeszów', 'Dąbrowskiego', '21', '35-018');
 INSERT INTO company values(null, 'Warszawa', 'Polna', '2', '43-023');
@@ -183,7 +196,7 @@ CREATE TABLE positions
 (
     position_name VARCHAR(100) UNIQUE PRIMARY KEY NOT NULL,
     position_salary DECIMAL(7,2) NOT NULL CHECK(position_salary >= 2200.0)
-);
+)ENGINE=InnoDB;
 
 INSERT INTO positions values('pracownik', 2200.0);
 INSERT INTO positions values('kierownik', 5600.0);
@@ -199,12 +212,19 @@ CREATE TABLE employee
     employee_email VARCHAR(100) UNIQUE NOT NULL,
     employee_fname VARCHAR(100) NOT NULL,
     employee_lname VARCHAR(100) NOT NULL,
-    employee_position VARCHAR(100) NOT NULL,
+    employee_position VARCHAR(100) NOT NULL DEFAULT 'Brak pozycji',
     employee_company INT NOT NULL,
 
-    FOREIGN KEY (employee_position) REFERENCES positions(position_name),
-    FOREIGN KEY (employee_company) REFERENCES company(company_id)
-);
+    FOREIGN KEY (employee_position) 
+    REFERENCES positions(position_name)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION,
+    
+    FOREIGN KEY (employee_company) 
+    REFERENCES company(company_id)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION
+)ENGINE=InnoDB;
 
 INSERT INTO employee values('61939237410', 'rzaoczny@bankapp.com', 'Rafał', 'Zaoczny', 'CEO', 4);
 INSERT INTO employee values('23784671911', 'tkowalski@bankapp.com', 'Tomasz', 'Kowalski', 'pracownik', 9);
@@ -235,14 +255,21 @@ INSERT INTO employee values('79184658551', 'akrolewska@bankapp.com', 'Aleksandra
 
 CREATE TABLE client_company
 (
-    client_nr VARCHAR(16) NOT NULL,
-    company_id INT NOT NULL,
+    client_nr VARCHAR(16),
+    company_id INT,
     
     PRIMARY KEY (client_nr, company_id),
 
-    FOREIGN KEY (client_nr) REFERENCES client (client_nr),
-    FOREIGN KEY (company_id) REFERENCES company (company_id)
-);
+    FOREIGN KEY (client_nr) 
+    REFERENCES client (client_nr)
+	ON UPDATE CASCADE
+	ON DELETE NO ACTION,
+    
+    FOREIGN KEY (company_id) 
+    REFERENCES company (company_id)
+    ON UPDATE CASCADE
+	ON DELETE NO ACTION
+)ENGINE=InnoDB;
 
 INSERT INTO client_company values('123456', 1);
 INSERT INTO client_company values('654321', 3);
