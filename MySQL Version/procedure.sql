@@ -92,6 +92,19 @@ BEGIN
 END$$
 DELIMITER ;
 
+#############################################################################
+## procedura pokazujaca tabele przelewow klienta w danym okresie czasu
+DELIMITER $$
+$$
+CREATE PROCEDURE send_overflows_by_client(IN client VARCHAR(6), in first_date DATE, in second_date DATE)
+BEGIN
+	select client_nr, overflow_send_number, card_type, card_balance, overflow_recipent_number, overflow_data, overflow_amount
+	from send_overflows 
+	where client_nr = client and overflow_data >= first_date and overflow_data <= second_date
+	order by overflow_data;
+END$$
+DELIMITER ;
+
 ## przykładowe wywołania procedury
 CALL company_employee  ('Rzeszów', @emp);
 SELECT @emp;
@@ -103,6 +116,8 @@ CALL employ('sprzedawca', @emp);
 SELECT @emp;
 
 CALL indebted('Kredytowa', 0.0);
+
+CALL send_overflows_by_client('123456', '2022-01-01', '2023-01-01');
 
 CALL add_employee('61931237410', 'testtest@bankapp.com', 'Test', 'Test', 'CEO', 4);
 CALL add_client('111111', 'trudnehaslo', 'testowe', 'konto');
