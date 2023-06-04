@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once('../connect.php');
 ?>
 
 <!doctype html>
@@ -94,7 +95,7 @@ session_start();
           </div>
           <div class="row mb-4">
             <div class="col-sm border border-light bg-success bg-gradient">
-              <button class="btn btn-danger m-4 btn-lg showSingle" target="4">Tabela</button>
+              <button class="btn btn-danger m-4 btn-lg showSingle" target="4">Zadłużeni Klienci</button>
             </div>
           </div>
           <div class="row">
@@ -171,7 +172,6 @@ session_start();
                 <select class="form-select" id="inputGroupSelect01" name="position">
                   <option selected>Pozycja...</option>
                   <?php
-                  include '../connect.php';
                   $sql = ('SELECT position_name FROM positions ORDER BY position_name;');
                   $result = $conn->query($sql);
                   while ($row = $result->fetch_row()) {
@@ -184,7 +184,6 @@ session_start();
                 <select class="form-select" id="inputGroupSelect02" name="company">
                   <option selected>Firma...</option>
                   <?php
-                  include '../connect.php';
                   $sql = ('SELECT * FROM company ORDER BY company_city, company_street;');
                   $result = $conn->query($sql);
                   while ($row = $result->fetch_row()) {
@@ -228,30 +227,29 @@ session_start();
             <table class="table table-hover table-light">
             <thead class="thead-dark">
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Nr Klienta</th>
+                <th scope="col">Nr Karty</th>
+                <th scope="col">Imię</th>
+                <th scope="col">Nawizko</th>
+                <th scope="col">Typ Karty</th>
+                <th scope="col">Środki na karcie</th>
               </tr>
             </thead>
             <tbody class="tbody-light">
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
+              <?php
+                  $sql = ('CALL indebted("Kredytowa", 0.0);');
+                  $result = $conn->query($sql);
+                  while ($row = $result->fetch_assoc()) {
+                    echo '<tr>'.
+                         '<td>'.$row['client_nr'].'</td>'.
+                         '<td>'.$row['card_nr'].'</td>'.
+                         '<td>'.$row['client_fname'].'</td>'.
+                         '<td>'.$row['client_lname'].'</td>'.
+                         '<td>'.$row['card_type'].'</td>'.
+                         '<td>'.$row['card_balance'].'</td>'.
+                         '</tr>';
+                  }
+                ?>
             </tbody>
             </table>
           </div>
