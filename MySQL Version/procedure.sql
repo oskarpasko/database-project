@@ -79,6 +79,19 @@ BEGIN
 END$$
 DELIMITER ;
 
+
+#############################################################################
+## procedura pokazujaca karty w przedziale pienieznym
+DELIMITER $$
+$$
+CREATE PROCEDURE indebted(IN c_type ENUM('Debetowa', 'Kredytowa'), in balance DECIMAL(11,2))
+BEGIN
+	select client_nr, card_nr, client_fname, client_lname, card_type, card_balance from card_client cc 
+	where card_type = c_type and card_balance < balance
+	order by card_balance;
+END$$
+DELIMITER ;
+
 ## przykładowe wywołania procedury
 CALL company_employee  ('Rzeszów', @emp);
 SELECT @emp;
@@ -88,6 +101,8 @@ SELECT @emp;
 
 CALL employ('sprzedawca', @emp);
 SELECT @emp;
+
+CALL indebted('Kredytowa', 0.0);
 
 CALL add_employee('61931237410', 'testtest@bankapp.com', 'Test', 'Test', 'CEO', 4);
 CALL add_client('111111', 'trudnehaslo', 'testowe', 'konto');
