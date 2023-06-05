@@ -32,7 +32,7 @@ CREATE TABLE card
     card_cvc_number VARCHAR(3) NOT NULL CHECK(char_length(card_cvc_number)=3),
     card_type ENUM('Debetowa', 'Kredytowa'),
     card_balance DECIMAL(11,2) NOT NULL,
-    client_nr VARCHAR(6) NOT NULL CHECK(char_length(client_nr) = 6),
+    client_nr VARCHAR(6) NOT NULL,
     
     FOREIGN KEY (client_nr)
     REFERENCES client(client_nr)
@@ -55,8 +55,8 @@ INSERT INTO card values('9102910291029102', '2026-02-08', '520', 'Kredytowa', -1
 CREATE TABLE overflow
 (
 	overflow_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    overflow_send_number VARCHAR(16) NOT NULL CHECK(char_length(overflow_send_number)=16),
-    overflow_recipent_number VARCHAR(16) NOT NULL CHECK(char_length(overflow_recipent_number)=16),
+    overflow_send_number VARCHAR(16) NOT NULL,
+    overflow_recipent_number VARCHAR(16) NOT NULL,
     overflow_data DATE NOT NULL,
     overflow_amount DECIMAL(11,2) NOT NULL,
     
