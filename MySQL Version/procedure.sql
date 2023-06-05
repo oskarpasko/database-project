@@ -117,6 +117,26 @@ BEGIN
 END$$
 DELIMITER ; 
 
+#############################################################################
+## procedura wyświetlająca zadłużonych klinetów w konkretnej placówce
+DELIMITER $$
+$$
+CREATE PROCEDURE indebted_city(city VARCHAR(100), street VARCHAR(100), nr VARCHAR(5), post_code VARCHAR(6))
+BEGIN
+	SELECT client.client_nr, company_city, company_street, company_nr, company_post_code, card_nr, card_balance
+	FROM client_company
+	LEFT JOIN company USING(company_id)
+	LEFT JOIN client USING(client_nr)
+	LEFT JOIN card ON card.client_nr = client.client_nr 
+	WHERE card_balance < 0 
+	AND company_city = city
+	AND company_street = street
+	AND company_nr = nr
+	AND company_post_code = post_code
+	ORDER BY card_balance;
+END$$
+DELIMITER ;
+
 ## przykładowe wywołania procedury
 CALL company_employee  ('Rzeszów', @emp);
 SELECT @emp;
@@ -136,3 +156,4 @@ CALL add_client('111111', 'trudnehaslo', 'testowe', 'konto');
 CALL add_card('1111111111111111', '2025-03-03', '420', 'Debetowa', 0.0, '111111'); 
 CALL add_position('kurier', '2345.00') ;
 CALL position_salary_brutto(0.17);
+CALL indebted_city("Rzeszów", "Dąbrowskiego", "21", "35-018");
