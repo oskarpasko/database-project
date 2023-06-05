@@ -107,3 +107,12 @@ ON employee_company = company_id
 LEFT JOIN positions
 ON position_name = employee_position
 using(client_nr)
+
+## detailed company_client
+CREATE VIEW detailed_company_client AS
+SELECT client.client_nr, company_city, company_street, company_nr, company_post_code, card_nr, card_balance
+FROM client_company
+LEFT JOIN company USING(company_id)
+LEFT JOIN client USING(client_nr)
+LEFT JOIN card ON card.client_nr = client.client_nr 
+ORDER BY card_balance;
