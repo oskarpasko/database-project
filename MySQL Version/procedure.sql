@@ -105,6 +105,18 @@ BEGIN
 END$$
 DELIMITER ;
 
+#############################################################################
+## procedura wyświetlająca zarobki pozycji w firmie netto i brutto
+DELIMITER $$
+$$
+CREATE PROCEDURE position_salary_brutto(tax FLOAT) 
+BEGIN
+	SELECT position_name, position_salary AS 'netto', brutto(position_salary, tax) AS 'brutto'
+	FROM positions
+	ORDER BY position_salary;
+END$$
+DELIMITER ; 
+
 ## przykładowe wywołania procedury
 CALL company_employee  ('Rzeszów', @emp);
 SELECT @emp;
@@ -123,3 +135,4 @@ CALL add_employee('61931237410', 'testtest@bankapp.com', 'Test', 'Test', 'CEO', 
 CALL add_client('111111', 'trudnehaslo', 'testowe', 'konto');
 CALL add_card('1111111111111111', '2025-03-03', '420', 'Debetowa', 0.0, '111111'); 
 CALL add_position('kurier', '2345.00') ;
+CALL position_salary_brutto(0.17);
