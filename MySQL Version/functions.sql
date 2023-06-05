@@ -22,7 +22,7 @@ DELIMITER ;
 ## Funckja zwracajaca sume wyplat dla pracownikow w poszczegolnej placowce
 
 DELIMITER $$
-CREATE FUNCTION company_salary(city VARCHAR(100)) 
+CREATE FUNCTION city_salary(city VARCHAR(100)) 
 RETURNS VARCHAR(10)
 DETERMINISTIC
 BEGIN
