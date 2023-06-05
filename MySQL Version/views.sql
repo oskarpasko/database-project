@@ -97,4 +97,13 @@ from overflow
 left join card 
 on overflow_send_number = card_nr
 left join client 
+
+## detailed employee
+CREATE VIEW detailed_employee AS 
+SELECT *
+FROM company
+LEFT JOIN employee 
+ON employee_company = company_id
+LEFT JOIN positions
+ON position_name = employee_position
 using(client_nr)
