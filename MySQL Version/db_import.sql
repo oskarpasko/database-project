@@ -32,7 +32,7 @@ CREATE TABLE card
     card_cvc_number VARCHAR(3) NOT NULL CHECK(char_length(card_cvc_number)=3),
     card_type ENUM('Debetowa', 'Kredytowa'),
     card_balance DECIMAL(11,2) NOT NULL,
-    client_nr VARCHAR(6) NOT NULL,
+    client_nr VARCHAR(6) NOT NULL CHECK(char_length(client_nr) = 6),
     
     FOREIGN KEY (client_nr)
     REFERENCES client(client_nr)
@@ -55,8 +55,8 @@ INSERT INTO card values('9102910291029102', '2026-02-08', '520', 'Kredytowa', -1
 CREATE TABLE overflow
 (
 	overflow_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    overflow_send_number VARCHAR(16) NOT NULL,
-    overflow_recipent_number VARCHAR(16) NOT NULL,
+    overflow_send_number VARCHAR(16) NOT NULL CHECK(char_length(overflow_send_number)=16),
+    overflow_recipent_number VARCHAR(16) NOT NULL CHECK(char_length(overflow_recipent_number)=16),
     overflow_data DATE NOT NULL,
     overflow_amount DECIMAL(11,2) NOT NULL,
     
@@ -368,130 +368,23 @@ LEFT JOIN client USING(client_nr)
 LEFT JOIN company USING(company_id)
 ORDER BY company_city;
 
-/*
-Kody dodające procedury do bazy danych
-dodatkowo są dodane przykłady wywołania procedur
-*/
+## wysłane przelewy
+create view send_overflows as
+select *
+from overflow
+left join card 
+on overflow_send_number = card_nr
+left join client 
 
-#############################################################################
-## procedura licząca pracowników na konkretnych stanowiskach
-DELIMITER $$
-$$
-CREATE PROCEDURE bankapp.employ(IN employy VARCHAR(20), OUT emp INT)
-BEGIN
-	SELECT COUNT(*) INTO emp FROM bankapp.employee
-	WHERE employee_position  = employy;
-END$$
-DELIMITER ;
-
-## przykładowe wywołania procedury
-CALL employ('sprzedawca', @emp);
-SELECT @emp;
-
-CALL employ('kierownik', @emp);
-SELECT @emp;
-
-CALL employ('ceo', @emp);
-SELECT @emp;
-
-CALL employ('menager', @emp);
-SELECT @emp;
-
-#############################################################################
-## procedura liczaca ilosc wykonanych przelewow przez danego klienta
-DELIMITER $$
-$$
-CREATE PROCEDURE bankapp.client_overflow(IN cli CHAR(6), OUT emp INT)
-BEGIN
-	SELECT COUNT(*) INTO emp FROM detailed_overflow
-	WHERE client_nr  = cli;
-END$$
-DELIMITER ;
-
-## przykładowe wywołania procedury
-CALL client_overflow ('123456', @emp);
-SELECT @emp;
-
-CALL client_overflow ('654321', @emp);
-SELECT @emp;
-
-#############################################################################
-## procedura liczaca ilosc pracownikow w kazdym miescie
-DELIMITER $$
-$$
-CREATE PROCEDURE bankapp.company_employee(IN city VARCHAR(20), OUT emp INT)
-BEGIN
-	SELECT COUNT(*) INTO emp FROM company
-	JOIN employee
-	ON employee.employee_company = company.company_id 
-	WHERE company_city = city;
-END$$
-DELIMITER ;
-
-#############################################################################
-## procedura pokazujaca karty w przedziale pienieznym
-DELIMITER $$
-$$
-CREATE PROCEDURE indebted(IN c_type ENUM('Debetowa', 'Kredytowa'), in balance DECIMAL(11,2))
-BEGIN
-	select client_nr, card_nr, client_fname, client_lname, card_type, card_balance from card_client cc 
-	where card_type = c_type and card_balance < balance
-	order by card_balance;
-END$$
-DELIMITER ;
-
-#############################################################################
-## procedura pokazujaca tabele przelewow klienta w danym okresie czasu
-DELIMITER $$
-$$
-CREATE PROCEDURE send_overflows_by_client(IN client VARCHAR(6), in first_date DATE, in second_date DATE)
-BEGIN
-	select client_nr, overflow_send_number, card_type, card_balance, overflow_recipent_number, overflow_data, overflow_amount
-	from send_overflows 
-	where client_nr = client and overflow_data >= first_date and overflow_data <= second_date
-	order by overflow_data;
-END$$
-DELIMITER ;
-
-#############################################################################
-## procedura dodajaca nowego pracownika
-DELIMITER $$
-$$
-CREATE PROCEDURE add_employee (IN pesel varchar(11),IN email varchar(50),IN fname varchar(50),IN lname varchar(50),IN posn varchar(50),IN company INT)
-BEGIN
-    insert into employee values (pesel, email, fname, lname, posn, company);
-END$$
-DELIMITER ;
-
-#############################################################################
-## procedura dodajaca nowego klienta
-DELIMITER $$
-$$
-CREATE PROCEDURE add_client (IN nr varchar(6),IN passwd varchar(50),IN fname varchar(50),IN lname varchar(50))
-BEGIN
-    insert into client values (nr, passwd, fname, lname);
-END$$
-DELIMITER ;
-
-#############################################################################
-## procedura dodajaca nowa karte
-DELIMITER $$
-$$
-CREATE PROCEDURE add_card (IN nr varchar(16),IN term_data DATE,IN cvc varchar(3),IN card_type ENUM('Debetowa', 'Kredytowa'),IN balance FLOAT, IN client VARCHAR(6))
-BEGIN
-    insert into card values (nr, term_data, cvc, card_type, balance, client);
-END$$
-DELIMITER ;
-
-#############################################################################
-## procedura dodajaca nowa pozycje
-DELIMITER $$
-$$
-CREATE PROCEDURE add_position (IN name varchar(16),IN salary FLOAT)
-BEGIN
-    insert into positions values (name, salary);
-END$$
-DELIMITER ;
+## detailed employee
+CREATE VIEW detailed_employee AS 
+SELECT *
+FROM company
+LEFT JOIN employee 
+ON employee_company = company_id
+LEFT JOIN positions
+ON position_name = employee_position
+using(client_nr)
 
 /*
 Kody dodające funkcje do bazy danych
@@ -517,7 +410,7 @@ DELIMITER ;
 ## Funckja zwracajaca sume wyplat dla pracownikow w poszczegolnej placowce
 
 DELIMITER $$
-CREATE FUNCTION company_salary(city VARCHAR(100)) 
+CREATE FUNCTION city_salary(city VARCHAR(100)) 
 RETURNS VARCHAR(10)
 DETERMINISTIC
 BEGIN
@@ -563,3 +456,249 @@ LEFT JOIN positions
 ON employee_position = position_name
 order by placa_brutto;
 
+#############################################################################
+## Funckja obliczajace sume wynagrodzen w konkretnym budynku
+
+DELIMITER $$
+CREATE FUNCTION company_salary(city VARCHAR(100), street VARCHAR(100), nr VARCHAR(5), post_code VARCHAR(6)) 
+RETURNS VARCHAR(10)
+DETERMINISTIC
+BEGIN
+	DECLARE suma VARCHAR(10);
+	SELECT SUM(position_salary) INTO suma 
+	FROM detailed_employee 
+	WHERE company_city = city AND company_street = street AND company_nr = nr AND company_post_code = post_code;
+	RETURN suma;	
+END$$
+DELIMITER ; 
+
+#############################################################################
+## Przykłady wywołania
+SELECT client_company_count("Rzeszów")
+SELECT city_salary("Warszawa")
+SELECT log_in("rzaoczny@bankapp.com", "61939237410")
+SELECT brutto(1000.0, 0.17)
+/*
+Kody dodające funkcje do bazy danych
+dodatkowo są dodane przykłady wywołania ich
+!!!!!! Uruchom plik bez przykładowych wywołań tylko same deklaracje funkcji !!!!!!
+*/
+
+#############################################################################
+## Funkcja liczaca klientow w kazdym miescie 
+
+DELIMITER $$
+CREATE FUNCTION client_company_count(city VARCHAR(100)) 
+RETURNS VARCHAR(10)
+DETERMINISTIC
+BEGIN
+	DECLARE liczba VARCHAR(10);
+	SELECT COUNT(*) INTO liczba FROM client_company_view WHERE company_city = city;
+	RETURN liczba;	
+END$$
+DELIMITER ;
+
+#############################################################################
+## Funckja zwracajaca sume wyplat dla pracownikow w poszczegolnej placowce
+
+DELIMITER $$
+CREATE FUNCTION city_salary(city VARCHAR(100)) 
+RETURNS VARCHAR(10)
+DETERMINISTIC
+BEGIN
+	DECLARE suma VARCHAR(10);
+	SELECT SUM(position_salary) INTO suma FROM detailed_employee WHERE company_city = "Rzeszów";
+	RETURN suma;	
+END$$
+DELIMITER ;
+
+#############################################################################
+## Funckja logujaca pracownika
+
+DELIMITER $$
+CREATE FUNCTION log_in(email VARCHAR(100), passwd VARCHAR(100)) 
+RETURNS VARCHAR(1)
+DETERMINISTIC
+BEGIN
+	DECLARE temp VARCHAR(1);
+	SELECT COUNT(*) INTO temp FROM employee WHERE employee_email = email AND employee_pesel = passwd;
+	RETURN temp;
+END$$
+DELIMITER ;
+
+#############################################################################
+## Funckja obliczajace wartosc brutto
+
+DELIMITER $$
+CREATE FUNCTION brutto(balance DECIMAL(11,2), tax FLOAT) 
+RETURNS DECIMAL(11,2)
+DETERMINISTIC
+BEGIN
+	DECLARE temp DECIMAL(7,2);
+	set temp = balance + (balance * cast(tax as decimal(7,2)));
+	RETURN temp;
+END$$
+DELIMITER ;
+
+## wplace pracownikow
+CREATE view salaries AS
+SELECT employee_email, employee_fname, employee_lname, position_salary as placa_netto, brutto(position_salary, 0.17) as placa_brutto, position_name
+FROM employee
+LEFT JOIN positions 
+ON employee_position = position_name
+order by placa_brutto;
+
+#############################################################################
+## Funckja obliczajace sume wynagrodzen w konkretnym budynku
+
+DELIMITER $$
+CREATE FUNCTION company_salary(city VARCHAR(100), street VARCHAR(100), nr VARCHAR(5), post_code VARCHAR(6)) 
+RETURNS VARCHAR(10)
+DETERMINISTIC
+BEGIN
+	DECLARE suma VARCHAR(10);
+	SELECT SUM(position_salary) INTO suma 
+	FROM detailed_employee 
+	WHERE company_city = city AND company_street = street AND company_nr = nr AND company_post_code = post_code;
+	RETURN suma;	
+END$$
+DELIMITER ; 
+
+/*
+Kody dodające procedury do bazy danych
+dodatkowo są dodane przykłady wywołania procedur
+*/
+
+#############################################################################
+## procedura licząca pracowników na konkretnych stanowiskach
+DELIMITER $$
+$$
+CREATE PROCEDURE bankapp.employ(IN employy VARCHAR(20), OUT emp INT)
+BEGIN
+	SELECT COUNT(*) INTO emp FROM bankapp.employee
+	WHERE employee_position  = employy;
+END$$
+DELIMITER ;
+
+#############################################################################
+## procedura liczaca ilosc wykonanych przelewow przez danego klienta
+DELIMITER $$
+$$
+CREATE PROCEDURE bankapp.client_overflow(IN cli CHAR(6), OUT emp INT)
+BEGIN
+	SELECT COUNT(*) INTO emp FROM detailed_overflow
+	WHERE client_nr  = cli;
+END$$
+DELIMITER ;
+
+#############################################################################
+## procedura liczaca ilosc pracownikow w kazdym miescie
+DELIMITER $$
+$$
+CREATE PROCEDURE bankapp.company_employee(IN city VARCHAR(20), OUT emp INT)
+BEGIN
+	SELECT COUNT(*) INTO emp FROM company
+	JOIN employee
+	ON employee.employee_company = company.company_id 
+	WHERE company_city = city;
+END$$
+DELIMITER ;
+
+
+#############################################################################
+## procedura dodajaca nowego pracownika
+DELIMITER $$
+$$
+CREATE PROCEDURE add_employee (IN pesel varchar(11),IN email varchar(50),IN fname varchar(50),IN lname varchar(50),IN posn varchar(50),IN company INT)
+BEGIN
+    insert into employee values (pesel, email, fname, lname, posn, company);
+END$$
+DELIMITER ;
+
+#############################################################################
+## procedura dodajaca nowego klienta
+DELIMITER $$
+$$
+CREATE PROCEDURE add_client (IN nr varchar(6),IN passwd varchar(50),IN fname varchar(50),IN lname varchar(50))
+BEGIN
+    insert into client values (nr, passwd, fname, lname);
+END$$
+DELIMITER ;
+
+#############################################################################
+## procedura dodajaca nowa karte
+DELIMITER $$
+$$
+CREATE PROCEDURE add_card (IN nr varchar(16),IN term_data DATE,IN cvc varchar(3),IN card_type ENUM('Debetowa', 'Kredytowa'),IN balance FLOAT, IN client VARCHAR(6))
+BEGIN
+    insert into card values (nr, term_data, cvc, card_type, balance, client);
+END$$
+DELIMITER ;
+
+#############################################################################
+## procedura dodajaca nowa pozycje
+DELIMITER $$
+$$
+CREATE PROCEDURE add_position (IN name varchar(16),IN salary FLOAT)
+BEGIN
+    insert into positions values (name, salary);
+END$$
+DELIMITER ;
+
+
+#############################################################################
+## procedura pokazujaca karty w przedziale pienieznym
+DELIMITER $$
+$$
+CREATE PROCEDURE indebted(IN c_type ENUM('Debetowa', 'Kredytowa'), in balance DECIMAL(11,2))
+BEGIN
+	select client_nr, card_nr, client_fname, client_lname, card_type, card_balance from card_client cc 
+	where card_type = c_type and card_balance < balance
+	order by card_balance;
+END$$
+DELIMITER ;
+
+#############################################################################
+## procedura pokazujaca tabele przelewow klienta w danym okresie czasu
+DELIMITER $$
+$$
+CREATE PROCEDURE send_overflows_by_client(IN client VARCHAR(6), in first_date DATE, in second_date DATE)
+BEGIN
+	select client_nr, overflow_send_number, card_type, card_balance, overflow_recipent_number, overflow_data, overflow_amount
+	from send_overflows 
+	where client_nr = client and overflow_data >= first_date and overflow_data <= second_date
+	order by overflow_data;
+END$$
+DELIMITER ;
+
+#############################################################################
+## procedura wyświetlająca zarobki pozycji w firmie netto i brutto
+DELIMITER $$
+$$
+CREATE PROCEDURE position_salary_brutto(tax FLOAT) 
+BEGIN
+	SELECT position_name, position_salary AS 'netto', brutto(position_salary, tax) AS 'brutto'
+	FROM positions
+	ORDER BY position_salary;
+END$$
+DELIMITER ; 
+
+#############################################################################
+## procedura wyświetlająca zadłużonych klinetów w konkretnej placówce
+DELIMITER $$
+$$
+CREATE PROCEDURE indebted_city(city VARCHAR(100), street VARCHAR(100), nr VARCHAR(5), post_code VARCHAR(6))
+BEGIN
+	SELECT client.client_nr, company_city, company_street, company_nr, company_post_code, card_nr, card_balance
+	FROM client_company
+	LEFT JOIN company USING(company_id)
+	LEFT JOIN client USING(client_nr)
+	LEFT JOIN card ON card.client_nr = client.client_nr 
+	WHERE card_balance < 0 
+	AND company_city = city
+	AND company_street = street
+	AND company_nr = nr
+	AND company_post_code = post_code
+	ORDER BY card_balance;
+END$$
+DELIMITER ;
