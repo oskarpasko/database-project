@@ -69,8 +69,24 @@ ON employee_position = position_name
 order by placa_brutto;
 
 #############################################################################
+## Funckja obliczajace sume wynagrodzen w konkretnym budynku
+
+DELIMITER $$
+CREATE FUNCTION company_salary(city VARCHAR(100), street VARCHAR(100), nr VARCHAR(5), post_code VARCHAR(6)) 
+RETURNS VARCHAR(10)
+DETERMINISTIC
+BEGIN
+	DECLARE suma VARCHAR(10);
+	SELECT SUM(position_salary) INTO suma 
+	FROM detailed_employee 
+	WHERE company_city = city AND company_street = street AND company_nr = nr AND company_post_code = post_code;
+	RETURN suma;	
+END$$
+DELIMITER ; 
+
+#############################################################################
 ## Przykłady wywołania
 SELECT client_company_count("Rzeszów")
-SELECT company_salary("Warszawa")
+SELECT city_salary("Warszawa")
 SELECT log_in("rzaoczny@bankapp.com", "61939237410")
 SELECT brutto(1000.0, 0.17)
